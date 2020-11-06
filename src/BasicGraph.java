@@ -72,32 +72,10 @@ public class BasicGraph {
         }
     }
 
-//    public int socialConnectionLevel(String root, String destination) {
-//        Set<String> visited = new LinkedHashSet<String>();
-//        Set<String> lastLevel = new LinkedHashSet<String>();
-//        Queue<String> queue = new LinkedList<String>();
-//        queue.add(root);
-//        visited.add(root);
-//        lastLevel.add(root);
-//        int scl=0;
-//
-//        while (!queue.isEmpty()) {
-//            String s = queue.poll();
-//
-//            if(s.equals(destination))
-//            {
-//                return scl;
-//            }
-//            for (String eachVertex : this.getAdjVertices(s)) {
-//                if (!visited.contains(eachVertex)) {
-//                    visited.add(eachVertex);
-//                    queue.add(eachVertex);
-//                }
-//            }
-//        }
-//
-//        return 0;
-//    }
+    /*
+        *******************************************************************************
+        背到这里为止
+     */
 
     public int socialConnectionLevel(String root, String destination) {
         Set<String> visited = new LinkedHashSet<String>();
@@ -113,6 +91,8 @@ public class BasicGraph {
 
             因为每一个Node和Edge其实还是只会过一次, 所以算力还是 O(V+E).   但是两个for loop不是好事, 我在想应该有更快捷简单的方法.
             注: 这道题只是用了一个很简单的graph去测试了一下. 如果可能的话, 需要更多验证.
+
+            这种题目类型叫做: shortest path on unweighted graph. 可以搜一下geek. 有不同解法.
          */
 
         while (!lastVisited.isEmpty()) {
