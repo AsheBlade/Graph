@@ -34,18 +34,7 @@ public class WeightedGraph {
         }
     }
 
-    private static class minDistance {
-        // 因为我们用的是String的label,所以做了这么一个 inner class.
-        // 如果int type的label, 则用一个int[] 就可以, 不用单独建这么一个class.
-        private int distance;
-        private String label;
 
-        public minDistance(String label, int distance)
-        {
-            this.distance = distance;
-            this.label = label;
-        }
-    }
 
     public WeightedGraph() {
         this.adj = new HashMap<String, List<Edge>>();
@@ -66,6 +55,9 @@ public class WeightedGraph {
     }
 
     public void printGraph() {
+        /*
+            这段可以不背, 基本用不到.
+         */
         StringBuffer sb = new StringBuffer();
         for(String s : adj.keySet()) {
             sb.append(s);
@@ -111,6 +103,21 @@ public class WeightedGraph {
     }
 
     // Use  Dijkstra's algorithm to find the shortest path on each graph.
+    // Dijkstra 从这里开始.
+
+    private static class minDistance {
+        // 因为我们用的是String的label,所以做了这么一个 inner class.
+        // 如果int type的label, 则用一个int[] 就可以, 不用单独建这么一个class.
+        private int distance;
+        private String label;
+
+        public minDistance(String label, int distance)
+        {
+            this.distance = distance;
+            this.label = label;
+        }
+    }
+
     public Map<String,Integer> dijkstra(String startVertex) {
         /*
             Dijkstra 这一块搜了很多都没有好的, 最后东拼西凑了一下代码是自己写的, 自我感觉已经优化到极致了.
@@ -124,8 +131,13 @@ public class WeightedGraph {
             值得一提的是, 这段代码是无差别搜索, 即给定一个起点搜索全图. 而不是有起点和终点的那种定向搜索.
 
             Return: distance 是一个hashmap<String, Integer>, key是vertex label, value是startVertex到各个key vertex 的最短距离.
+            注:
+            1. distance之中无法到达的点的distance 会是 Integer.MAX_VALUE, 可以在最后进行手工移除.
+            2. 原点的距离输出是0, 这个根据不同的题目可以保留或者移除.
+            3. 这个算法只能求得到固定点的最短距离, 无法求得打到固定点的最短距离路径. 如果要求路径, 还需要进行更改, 或者干脆使用其他算法.
 
             另: 这个代码是自己写的, 没有经过大量验证. 用的是小规模的graph严整, 所以最好能有大graph验证一下.
+            更新: 2020-11-06 这个代码已经三个不同的graph验证了三次, 包括String Graph, Integer Graph 和 上行下行Graph. 应该比较稳定了.
          */
         Map<String,Integer> distance = new HashMap<>(); // keep checking the distance from startVertex to each vertex.
         Set<String> visited = new LinkedHashSet<>();// track which vertex is visited.
@@ -179,6 +191,11 @@ public class WeightedGraph {
                 }
             }
         }
+
+        //最后把起点的0距离移除.  这个可以存在或者可以不存在, 根据题来定.
+        distance.remove(startVertex,0);
+
+        //注, 这个算法的distance之中无法到达的点的distance 会是 Integer.MAX_VALUE, 可以在最后进行手工移除.
 
         return distance;
     }

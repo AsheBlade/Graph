@@ -12,7 +12,7 @@ public class BasicGraph {
     }
 
     void addVertex(String label) {
-        adjVertices.putIfAbsent(label, new ArrayList<String>());
+        adjVertices.putIfAbsent(label, new ArrayList<>());
     }
 
 
@@ -37,8 +37,8 @@ public class BasicGraph {
     }
 
     public void breadthFirstTraversal(String root) {
-        Set<String> visited = new LinkedHashSet<String>();
-        Queue<String> queue = new LinkedList<String>();
+        Set<String> visited = new LinkedHashSet<>();
+        Queue<String> queue = new LinkedList<>();
         queue.add(root);
         visited.add(root);
 
@@ -55,8 +55,8 @@ public class BasicGraph {
     }
 
     public void depthFirstTraversal(String root) {
-        Set<String> visited = new LinkedHashSet<String>();
-        Stack<String> stack = new Stack<String>();
+        Set<String> visited = new LinkedHashSet<>();
+        Stack<String> stack = new Stack<>();
         stack.push(root);
         visited.add(root);
 
