@@ -78,15 +78,15 @@ public class BasicGraph {
      */
 
     public int socialConnectionLevel(String root, String destination) {
-        Set<String> visited = new LinkedHashSet<String>();
-        Set<String> lastVisited = new LinkedHashSet<String>();
+        Set<String> visited = new LinkedHashSet<>();
+        Set<String> lastVisited = new LinkedHashSet<>();
         visited.add(root);
         lastVisited.add(root);
         int scl =0;
 
         /*
             单纯的BFS其实解不了这道题. 因为BFS算的是过了多少个Node, 而这道题需要算过了多少层Node.
-            用lastVisted 去track上一层的Node, 然后scl计算经过的层数. 之后这一层traverse之后, 再用下一层(newVisted)把lastVisted覆盖.
+            用lastVisted 去track上一层的Node, 然后scl计算经过的层数. 之后这一层所有node traverse之后, 再用下一层(newVisted)把lastVisted覆盖.
             这个traverse方法对应在tree里面被称为 level order traverse, 因为是严格分层进行traverse.
 
             因为每一个Node和Edge其实还是只会过一次, 所以算力还是 O(V+E).   但是两个for loop不是好事, 我在想应该有更快捷简单的方法.

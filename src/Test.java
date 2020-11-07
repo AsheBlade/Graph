@@ -8,9 +8,51 @@ public class Test {
 
     public static void main(String[] args) {
 
-        buildBasicGraph();
+        //buildBasicGraph();
         //buildWeightedGraph();
         //buildIntWeightedGraph();
+        trackShortestPaths();
+    }
+
+    private static void trackShortestPaths()
+    {
+        TrackingBasicRoute tbr = new TrackingBasicRoute();
+
+        tbr.addVertex("Bob");
+        tbr.addVertex("Mark");
+        tbr.addVertex("Rob");
+        tbr.addVertex("Maria");
+        tbr.addVertex("Alice");
+
+        tbr.addEdge("Bob", "Alice");
+        tbr.addEdge("Bob",  "Rob");
+        tbr.addEdge("Alice", "Mark");
+        tbr.addEdge("Alice", "Maria");
+        tbr.addEdge("Rob", "Mark");
+        tbr.addEdge("Maria", "Rob");
+
+        System.out.println(tbr.printGraph() + "\n");;
+
+        // BFS
+        System.out.print("Print BFS Result : ");
+        tbr.breadthFirstTraversal("Bob");
+        System.out.println();
+
+        System.out.println(tbr.printPaths() + "\n");
+        tbr.cleanPaths();
+
+        // DFS
+        System.out.print("Print DFS Result : ");
+        tbr.depthFirstTraversal("Bob");
+        System.out.println();
+
+        System.out.println(tbr.printPaths() + "\n");
+
+        /*
+            Social Connection Level
+         */
+//        System.out.print("Social Connection Level between Maria and Bob : ");
+//        System.out.println(tbr.socialConnectionLevel("Maria", "Bob"));
     }
 
     private static void buildIntWeightedGraph()
