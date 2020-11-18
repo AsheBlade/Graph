@@ -6,7 +6,7 @@ public class TrackingBasicRoute {
         还是老规矩, 用String, 不用Int, Int不通用.
 
         没有什么难点,在还是加了一个paths的量去track route而已, key是String是每个vertex的label, value是路径.
-        因为BFS和DFS都是所有的点走一次, 不存在Dijkstra这种最短路径问题需要不断和过去矫正的问题.  所以没什么复杂的, 看一下很容易理解.  DFS和BFS里面都标注了, 加上root那一行总共也就4行代码.
+        因为BFS和DFS都是所有的点走一次, 跟Distra不一样, 还需要考虑优化的问题, 所以没什么复杂的, 看一下很容易理解.  DFS和BFS里面都标注了, 加上root那一行总共也就4行代码.
      */
 
     private Map<String, List<String>> adj;
@@ -72,6 +72,7 @@ public class TrackingBasicRoute {
         StringBuffer sb = new StringBuffer();
         for(String s : paths.keySet()) {
             sb.append(s);
+            sb.append(paths.get(s).size());
             sb.append(paths.get(s)+ "\n");
         }
         return sb.toString();

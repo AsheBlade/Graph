@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 public class Graph {
     private Map<Vertex, List<Vertex>> adjVertices;
 
+    /*
+        BasicGraph 写的尽量简洁, 为了背诵方便. 这个写的尽量复杂.
+        添加了removeEdge 方法
+     */
     Graph() {
         this.adjVertices = new HashMap<Vertex, List<Vertex>>();
     }
